@@ -134,7 +134,8 @@ lsusb
 
 1、WSL2访问windows文件的方法：
 
-WSL2不能直接访问windows文件路径，如`C:\Users\user`，你需要将路径改成：`/mnt/c/Users/user`。因此在用WSL2的GAMMA处理文件时，需要将文件路径改一下。可以在windows右键菜单中定义一个菜单，以使得windows文件路径自动转换为WSL2中的对应路径。
+WSL2不能直接访问windows文件路径，如`C:\Users\user`，你需要将路径改成：`/mnt/c/Users/user`。因此在用WSL2的GAMMA处理文件时，需要将文件路径改一下。可以在windows右键菜单中定义一个菜单，以使得windows文件路径自动转换为WSL2中的对应路径，参考[windows添加右键菜单以自动转换WSL路径的教程](https://github.com/BlueBlueKitty/use_wsl_better/blob/main/docs/windows%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2WSL%E8%B7%AF%E5%BE%84%E7%9A%84%E6%95%99%E7%A8%8B.md)。
 
 
 2、WSL2访问windows目录下的文件的IO效率较低，尽量把GAMMA处理的数据放在WSL2所在目录。
+
