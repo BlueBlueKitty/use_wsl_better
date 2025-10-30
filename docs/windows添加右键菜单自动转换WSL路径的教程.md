@@ -10,7 +10,7 @@
 
 ## 配置方法：
 
-下载[copy_as_wsl_path.vbs脚本](../resource/copy_as_wsl_path.vbs)和[复制为WSL路径.reg脚本](../resource/复制为WSL路径.reg)。
+下载[copy_as_wsl_path.vbs脚本](https://github.com/BlueBlueKitty/use_wsl_better/blob/main/resource/copy_as_wsl_path.vbs)和[复制为WSL路径.reg脚本](https://github.com/BlueBlueKitty/use_wsl_better/blob/main/resource/%E5%A4%8D%E5%88%B6%E4%B8%BAWSL%E8%B7%AF%E5%BE%84.reg)。
 
 将copy_as_wsl_path.vbs脚本放在"C:\Windows\"路径下，然后双击"复制为WSL路径.reg"脚本即可
 
