@@ -42,7 +42,7 @@ Ubuntu 20.0.4:   `ln -s libgdal.so.26.0.4 libgdal.so.20`
 
 windows搜索`WSL2 Settings`应用，将其中的网络模式改为`Mirrored`。如下图所示，之后关闭WSL2重启即可。
 
-<img src="D:\OneDrive\知识总结\笔记\Linux学习\WSL相关笔记\WSL2安装GAMMA的教程.assets\image-20251030204134476-1761828098649-3.png" alt="image-20251030204134476" style="zoom:50%;" />
+<img src="../imgs/img1.png" alt="img1" style="zoom:50%; margin: 0 auto; display: block;" />
 
 如果WSL2还是没有识别到加密狗，还是无法正常使用GAMMA命令，即运行`SLC_adf`命令报错`Sentinel LDK Protection System: Sentinel key not found (H0007)`，则需要通过下面的步骤排查解决问题。以下会介绍每个步骤执行的原因，理解其原理后才便于我们解决出现的问题。
 
@@ -68,9 +68,9 @@ sudo ufw reload
 
 之后，再次运行`nc -vz 加密狗所在Linux设备的局域网ip 1947`命令检查是否能正常访问，直至能够正常访问。
 
-然后我们检查下WSL2能否访问到GAMMA加密狗，在WSL2终端打开的情况下，在windows浏览器中输入http://localhost:1947/_int_/devices.html，如下图所示，正常情况下，会有一个名为`Local`的设备，这个不用管，如果有第二个名为`ubuntu-z`（可能叫这个名字，也可能不是，但是一般会有一个U盘的图标），其便是GAMMA软件的加密狗。这时，我们就可以在WSL2中正常使用GAMMA了。
+然后我们检查下WSL2能否访问到GAMMA加密狗，在WSL2终端打开的情况下，在windows浏览器中输入http://localhost:1947/_int_/devices.html, 如下图所示，正常情况下，会有一个名为`Local`的设备，这个不用管，如果有第二个名为`ubuntu-z`（可能叫这个名字，也可能不是，但是一般会有一个U盘的图标），其便是GAMMA软件的加密狗。这时，我们就可以在WSL2中正常使用GAMMA了。
 
-![image-20251030204235839](D:\OneDrive\知识总结\笔记\Linux学习\WSL相关笔记\WSL2安装GAMMA的教程.assets\image-20251030204235839-1761828157127-5.png)
+![img2](../imgs/img2.png)
 
 但是如果浏览器中没有显示第二个设备，有可能是`aksusbd`驱动没有自动识别到GAMMA加密狗设备，我们可以尝试为驱动手动指定加密狗所在设备的ip，因此我们编辑`/etc/hasplm/hasplm.ini`文件，
 
@@ -110,7 +110,7 @@ usbipd list
 usbipd bind --busid <BUSID>
 ```
 
-![image-20251030210259084](D:\OneDrive\知识总结\笔记\Linux学习\WSL相关笔记\WSL2安装GAMMA的教程.assets\image-20251030210259084.png)
+![img3](../imgs/img3.png)
 
 接着使用下面的命令中来使GAMMA加密狗的USB设备连接到WSL2，其中的BUSID同上。**注意，如果WSL2终端中期或者当加密狗USB设备重置/物理拔下/重新插入时，可能需要重新运行下面的这条命令**。
 
@@ -126,7 +126,7 @@ lsusb
 
 如下图所示，会看到刚刚连接的GAMMA加密狗USB设备（可以通过对比VID:PID来确定USB设备，我的加密狗设备的ID为0529:0001)。
 
-![image-20251030210400138](D:\OneDrive\知识总结\笔记\Linux学习\WSL相关笔记\WSL2安装GAMMA的教程.assets\image-20251030210400138.png)
+![img4](../imgs/img4.png)
 
 如果WSL2中已经安装了GAMMA加密狗的驱动，那么插入windows电脑的GAMMA加密狗应该就会亮灯，亮灯说明加密狗成功运行了，这时就可以愉快地使用GAMMA了。
 
@@ -135,5 +135,6 @@ lsusb
 1、WSL2访问windows文件的方法：
 
 WSL2不能直接访问windows文件路径，如`C:\Users\user`，你需要将路径改成：`/mnt/c/Users/user`。因此在用WSL2的GAMMA处理文件时，需要将文件路径改一下。可以在windows右键菜单中定义一个菜单，以使得windows文件路径自动转换为WSL2中的对应路径。
+
 
 2、WSL2访问windows目录下的文件的IO效率较低，尽量把GAMMA处理的数据放在WSL2所在目录。
