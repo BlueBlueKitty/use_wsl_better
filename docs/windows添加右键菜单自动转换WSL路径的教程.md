@@ -22,14 +22,31 @@
 D:\Tools\copy_as_wsl_path.vbs
 ```
 
-那么你需要在注册表中把命令改成：
+那么你需要将[复制为WSL路径.reg脚本](https://github.com/BlueBlueKitty/use_wsl_better/blob/main/resource/%E5%A4%8D%E5%88%B6%E4%B8%BAWSL%E8%B7%AF%E5%BE%84.reg)改成：
 
 ```
-reg复制编辑[HKEY_CLASSES_ROOT\*\shell\CopyAsWSLPath\command]
+﻿Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\*\shell\CopyAsWSLPath]
+@="复制为 WSL 路径"
+"Icon"="imageres.dll,-5302"
+
+[HKEY_CLASSES_ROOT\*\shell\CopyAsWSLPath\command]
 @="wscript.exe \"D:\\Tools\\copy_as_wsl_path.vbs\" \"%1\""
+
+[HKEY_CLASSES_ROOT\Directory\shell\CopyAsWSLPath]
+@="复制为 WSL 路径"
+"Icon"="imageres.dll,-5302"
 
 [HKEY_CLASSES_ROOT\Directory\shell\CopyAsWSLPath\command]
 @="wscript.exe \"D:\\Tools\\copy_as_wsl_path.vbs\" \"%1\""
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\CopyAsWSLPath]
+@="复制为 WSL 路径"
+"Icon"="imageres.dll,-5302"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\CopyAsWSLPath\command]
+@="wscript.exe \"D:\\Tools\\copy_as_wsl_path.vbs\" \"%V\""
 ```
 
 
